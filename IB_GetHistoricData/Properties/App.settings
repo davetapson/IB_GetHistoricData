@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="LogsFolderPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:/Logs/IB_GetHistoricData</Value>
+      <Value Profile="(Default)">C:/Logs/IB_GetHistoricData/</Value>
     </Setting>
   </Settings>
 </SettingsFile>

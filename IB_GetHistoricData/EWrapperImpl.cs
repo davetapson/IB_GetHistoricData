@@ -5,13 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using IBApi;
+using NLog;
 
 namespace IB_GetHistoricData
 {
     //! [ewrapperimpl]
     public class EWrapperImpl : EWrapper 
     {
-    //! [ewrapperimpl]
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        //! [ewrapperimpl]
         private int nextOrderId;
         //! [socket_declare]
         EClientSocket clientSocket;
@@ -47,18 +50,21 @@ namespace IB_GetHistoricData
 
         public virtual void error(Exception e)
         {
+            logger.Error("Error: " + e);
             Console.WriteLine("Exception thrown: "+e);
             throw e;
         }
         
         public virtual void error(string str)
         {
+            logger.Error("Error returned from IB: " + str);
             Console.WriteLine("Error: "+str+"\n");
         }
         
         //! [error]
         public virtual void error(int id, int errorCode, string errorMsg)
         {
+            logger.Error("Error returned from IB: id:" + id + " errorCode: " + errorCode + " errorMsg: " + errorMsg);
             Console.WriteLine("Error. Id: " + id + ", Code: " + errorCode + ", Msg: " + errorMsg + "\n");
         }
         //! [error]

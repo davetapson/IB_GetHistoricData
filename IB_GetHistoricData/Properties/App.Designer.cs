@@ -25,7 +25,7 @@ namespace IB_GetHistoricData.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:/Logs/IB_GetHistoricData")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:/Logs/IB_GetHistoricData/")]
         public string LogsFolderPath {
             get {
                 return ((string)(this["LogsFolderPath"]));
