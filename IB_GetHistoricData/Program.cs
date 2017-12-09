@@ -10,9 +10,16 @@ namespace IB_GetHistoricData
     {
         static void Main(string[] args)
         {
-            IBGatewayClientConnectionData iBGatewayClientConnectionData = new IBGatewayClientConnectionData("", 4002, 1001); // todo - get from db
-            HistoricalData historicalData = new HistoricalData(iBGatewayClientConnectionData);
-            historicalData.GetHistoricData();
+            try
+            {
+                IBGatewayClientConnectionData iBGatewayClientConnectionData = new IBGatewayClientConnectionData("", 4002, 1001); // todo - get from db
+                HistoricalData historicalData = new HistoricalData(iBGatewayClientConnectionData);
+                historicalData.GetHistoricData();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
     }
 }

@@ -49,11 +49,14 @@ namespace IB_GetHistoricData
             while (ibClient.NextOrderId <= 0) { }
 
             // Create a new contract to specify the security we are searching for
-            Contract contract = new Contract();
-            contract.Symbol = "IBM";
-            contract.SecType = "STK";
-            contract.Exchange = "SMART";
-            contract.Currency = "USD";
+            Contract contract = new Contract
+            {
+                Symbol = "IBM",
+                SecType = "STK",
+                Exchange = "SMART",
+                Currency = "USD"
+            };
+
             // Create a new TagValue List object (for API version 9.71) 
             List<TagValue> historicalDataOptions = new List<TagValue>();
 

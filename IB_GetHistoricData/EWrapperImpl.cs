@@ -18,11 +18,16 @@ namespace IB_GetHistoricData
         public readonly EReaderSignal Signal;
         //! [socket_declare]
 
+        DL.Repository repository;
+        
         //! [socket_init]
         public EWrapperImpl()
         {
             Signal = new EReaderMonitorSignal();
             clientSocket = new EClientSocket(this, Signal);
+
+            DL.Connection connection = new DL.Connection();
+            repository = new DL.Repository(connection);
         }
         //! [socket_init]
 
@@ -343,7 +348,10 @@ namespace IB_GetHistoricData
         //! [historicaldata]
         public virtual void historicalData(int reqId, Bar bar)
         {
-            Console.WriteLine("HistoricalData. " + reqId + " - Time: " + bar.Time + ", Open: " + bar.Open + ", High: " + bar.High + ", Low: " + bar.Low + ", Close: " + bar.Close + ", Volume: " + bar.Volume + ", Count: " + bar.Count + ", WAP: " + bar.WAP);
+            Console.WriteLine("HistoricalData. " + reqId + " - Time: " + bar.Time + ", Open: " + bar.Open + ", High: " + bar.High + 
+                              ", Low: " + bar.Low + ", Close: " + bar.Close + ", Volume: " + bar.Volume + ", Count: " + bar.Count + ", WAP: " + bar.WAP);
+
+            repository.InsertTick(reqId, bar.Time, bar.Open, bar.High, bar.Low, bar.Close, bar.Volume, bar.Count, bar.WAP);
         }
         //! [historicaldata]
 
@@ -436,6 +444,8 @@ namespace IB_GetHistoricData
         public virtual void historicalDataEnd(int reqId, string startDate, string endDate)
         {
             Console.WriteLine("HistoricalDataEnd - "+reqId+" from "+startDate+" to "+endDate);
+
+            repository.InsertHistoricalDataEnd(reqId, startDate, endDate);
         }
         //! [historicaldataend]
 
