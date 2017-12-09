@@ -10,6 +10,8 @@ namespace IB_GetHistoricData
     {
         static void Main(string[] args)
         {
+            HistoricalData historicalData = new HistoricalData();
+            historicalData.GetHistoricData();
         }
     }
 }
