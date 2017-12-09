@@ -8,6 +8,13 @@ namespace IB_GetHistoricData
 {
     class HistoricalData
     {
+        private IBGatewayClientConnectionData iBGatewayClientConnectionData;
+
+        public HistoricalData(IBGatewayClientConnectionData iBGatewayClientConnectionData)
+        {
+            this.iBGatewayClientConnectionData = iBGatewayClientConnectionData;
+        }
+
         public void GetHistoricData()
         {
             // Ending date for the time series (change as necessary)
@@ -23,7 +30,9 @@ namespace IB_GetHistoricData
             // name here in place of "Samples".
             EWrapperImpl ibClient = new EWrapperImpl();
 
-            ibClient.ClientSocket.eConnect("", 4002, 0);
+            ibClient.ClientSocket.eConnect(iBGatewayClientConnectionData.Server,
+                                           iBGatewayClientConnectionData.Port,
+                                           iBGatewayClientConnectionData.ClientId);
 
             var reader = new EReader(ibClient.ClientSocket, ibClient.Signal);
             reader.Start();
