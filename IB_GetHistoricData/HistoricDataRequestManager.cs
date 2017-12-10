@@ -38,16 +38,20 @@ namespace IB_GetHistoricData
             {
                 try
                 {
-                    clientSocket.reqHistoricalData(hdr.RequestId,
-                                                           hdr.Contract,
-                                                           hdr.EndDate,
-                                                           hdr.Duration,
-                                                           hdr.GetBarSize(hdr.BarSize),
-                                                           hdr.GetWhatToShow(hdr.WhatToShow),
-                                                           hdr.GetTradingHours(hdr.TradingHours),
-                                                           hdr.GetDateFormat(hdr.DateFormat),
-                                                           hdr.GetKeepUpToDate(hdr.KeepUpToDate),
-                                                           hdr.HistoricalDataOptions);
+                    logger.Trace("\nHistoricDataRequest :\n" + hdr.RequestId.ToString() + "\n" + hdr.Contract + "\n" + hdr.EndDate + "\n" + hdr.Duration + "\n" + hdr.GetBarSize(hdr.BarSize) + "\n" +
+                                 hdr.GetWhatToShow(hdr.WhatToShow) + "\n" +  hdr.GetTradingHours(hdr.TradingHours) + "(" + hdr.TradingHours + ")" + "\n" + hdr.GetDateFormat(hdr.DateFormat) + "(" + hdr.DateFormat + ")" + "\n" +
+                                 hdr.GetKeepUpToDate(hdr.KeepUpToDate) + "(" + hdr.KeepUpToDate + ")" + "\n" + hdr.HistoricalDataOptions);
+
+                    clientSocket.reqHistoricalData( hdr.RequestId,
+                                                    hdr.Contract,
+                                                    hdr.EndDate,
+                                                    hdr.Duration,
+                                                    hdr.GetBarSize(hdr.BarSize),
+                                                    hdr.GetWhatToShow(hdr.WhatToShow),
+                                                    hdr.GetTradingHours(hdr.TradingHours),
+                                                    hdr.GetDateFormat(hdr.DateFormat),
+                                                    hdr.GetKeepUpToDate(hdr.KeepUpToDate),
+                                                    hdr.HistoricalDataOptions);
                 }
                 catch (System.Exception e)
                 {

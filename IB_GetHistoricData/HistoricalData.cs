@@ -47,7 +47,7 @@ namespace IB_GetHistoricData
             historicDataRequestManager.MakeRequests();
             
             // Pause to review data
-            Console.ReadKey();
+            //Console.ReadKey();
 
             // end request
             historicDataRequestManager.EndRequests();
@@ -57,6 +57,16 @@ namespace IB_GetHistoricData
 
             logger.Info("End GetHistoricData");
         }
+
+        /*
+         *  logger.Trace("Sample trace message");
+            logger.Debug("Sample debug message");
+            logger.Info("Sample informational message");
+            logger.Warn("Sample warning message");
+            logger.Error("Sample error message");
+            logger.Fatal("Sample fatal error message");
+
+         * */
     }
 }
 
