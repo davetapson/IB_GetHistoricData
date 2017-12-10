@@ -46,9 +46,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DL\Connection.cs" />
-    <Compile Include="DL\Repository.cs" />
+    <Compile Include="DL\ContractRepository.cs" />
+    <Compile Include="DL\HistoricDataRequestRepo.cs" />
+    <Compile Include="DL\BarRepository.cs" />
+    <Compile Include="DL\TagValueRepository.cs" />
     <Compile Include="EWrapperImpl.cs" />
     <Compile Include="HistoricalData.cs" />
+    <Compile Include="HistoricalDataRequest.cs" />
+    <Compile Include="HistoricDataRequestManager.cs" />
     <Compile Include="IBGatewayClientConnectionData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\App.Designer.cs">

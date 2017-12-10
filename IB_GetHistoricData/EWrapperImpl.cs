@@ -21,7 +21,7 @@ namespace IB_GetHistoricData
         public readonly EReaderSignal Signal;
         //! [socket_declare]
 
-        DL.Repository repository;
+        DL.BarRepository repository;
         
         //! [socket_init]
         public EWrapperImpl()
@@ -29,8 +29,7 @@ namespace IB_GetHistoricData
             Signal = new EReaderMonitorSignal();
             clientSocket = new EClientSocket(this, Signal);
 
-            DL.Connection connection = new DL.Connection();
-            repository = new DL.Repository(connection);
+            repository = new DL.BarRepository();
         }
         //! [socket_init]
 
@@ -357,7 +356,7 @@ namespace IB_GetHistoricData
             Console.WriteLine("HistoricalData. " + reqId + " - Time: " + bar.Time + ", Open: " + bar.Open + ", High: " + bar.High + 
                               ", Low: " + bar.Low + ", Close: " + bar.Close + ", Volume: " + bar.Volume + ", Count: " + bar.Count + ", WAP: " + bar.WAP);
 
-            repository.InsertTick(reqId, bar.Time, bar.Open, bar.High, bar.Low, bar.Close, bar.Volume, bar.Count, bar.WAP);
+            repository.InsertBar(reqId, bar.Time, bar.Open, bar.High, bar.Low, bar.Close, bar.Volume, bar.Count, bar.WAP);
         }
         //! [historicaldata]
 

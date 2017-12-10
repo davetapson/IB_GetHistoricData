@@ -26,36 +26,48 @@ namespace IB_GetHistoricData.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("DAVE-LAPTOP\\SQLEXPRESS")]
-        public string server {
+        public string Server {
             get {
-                return ((string)(this["server"]));
+                return ((string)(this["Server"]));
             }
             set {
-                this["server"] = value;
+                this["Server"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("sa")]
-        public string username {
+        public string Username {
             get {
-                return ((string)(this["username"]));
+                return ((string)(this["Username"]));
             }
             set {
-                this["username"] = value;
+                this["Username"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Makatini@1")]
-        public string password {
+        public string Password {
             get {
-                return ((string)(this["password"]));
+                return ((string)(this["Password"]));
             }
             set {
-                this["password"] = value;
+                this["Password"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("IB_Data")]
+        public string Database {
+            get {
+                return ((string)(this["Database"]));
+            }
+            set {
+                this["Database"] = value;
             }
         }
     }

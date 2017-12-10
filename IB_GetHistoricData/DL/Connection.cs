@@ -1,20 +1,15 @@
 ﻿namespace IB_GetHistoricData.DL
 {
-    class Connection
+    internal static class Connection
     {
-        public Connection(string server, string userName, string password)
-        {
-            Server = server;
-            UserName = userName;
-            Password = password;
-        }
+        internal static string Server { get; set; }
+        internal static string DataBase { get; set; }
+        internal static string UserName { get; set; }
+        internal static string Password { get; set; }
 
-        public Connection(): this(Properties.db.Default.server,
-                       Properties.db.Default.username,
-                       Properties.db.Default.password){ }
-        
-        public string Server { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        internal static string ConnectionString = "Server=" + Server +
+                                         ";Database=" + DataBase +
+                                         ";User Id=" + UserName +
+                                         ";Password=" + Password + ";";
     }
 }
