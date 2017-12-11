@@ -50,9 +50,14 @@
     <Compile Include="DL\HistoricDataRequestRepo.cs" />
     <Compile Include="DL\BarRepository.cs" />
     <Compile Include="DL\TagValueRepository.cs" />
+    <Compile Include="enum classes\HistoricalDataTradingHours.cs" />
+    <Compile Include="enum classes\HistoricDataBarSize.cs" />
+    <Compile Include="enum classes\HistoricDataDurationUnits.cs" />
+    <Compile Include="enum classes\HistoricDataWhatToShow.cs" />
     <Compile Include="EWrapperImpl.cs" />
     <Compile Include="HistoricalData.cs" />
     <Compile Include="HistoricalDataRequest.cs" />
+    <Compile Include="enum classes\HistoricDataDateFormat.cs" />
     <Compile Include="HistoricDataRequestManager.cs" />
     <Compile Include="IBGatewayClientConnectionData.cs" />
     <Compile Include="Program.cs" />

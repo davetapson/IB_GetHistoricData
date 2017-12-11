@@ -63,10 +63,11 @@ namespace IB_GetHistoricData.DL
                 {
                     while (reader.Read())
                     {
-                        contract.Symbol = reader.GetString(0);
-                        contract.SecIdType = reader.GetString(1);
-                        contract.Exchange = reader.GetString(2);
-                        contract.Currency = reader.GetString(3);
+                        if (reader["IBContractId"] != DBNull.Value) contract.ConId = Convert.ToInt32(reader["IBContractId"]);
+                        contract.Symbol = reader["Symbol"].ToString().Trim();
+                        contract.SecType = reader["SecurityType"].ToString().Trim();
+                        contract.Exchange = reader["Exchange"].ToString().Trim();
+                        contract.Currency = reader["Currency"].ToString().Trim();
                     }
                 }
             }

@@ -13,7 +13,7 @@
         public IBGatewayClientConnectionData()
         {
             Server = "";
-            Port = 4002;
+            Port = 4001;
             ClientId = 1001;
         }
 

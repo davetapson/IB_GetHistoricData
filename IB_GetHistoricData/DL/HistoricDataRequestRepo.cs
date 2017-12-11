@@ -13,7 +13,7 @@ namespace IB_GetHistoricData.DL
 
             using (SqlConnection connection = new SqlConnection(Connection.ConnectionString))
             {
-                SqlCommand cmd = new SqlCommand("HistoricDataRequest_Get", connection)
+                SqlCommand cmd = new SqlCommand("HistoricDataRequest_GetAll", connection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -29,16 +29,19 @@ namespace IB_GetHistoricData.DL
                     while (reader.Read())
                     {
                         HistoricDataRequest historicDataRequest = new HistoricDataRequest(
-                            reader.GetInt32(0),
-                            contractRepository.Get(reader.GetInt32(1)),
-                            reader.GetString(2),
-                            reader.GetString(3),
-                            (HistoricDataRequest.HistoricDataBarSize)reader.GetInt32(4),
-                            (HistoricDataRequest.HistoricDataWhatToShow)reader.GetInt32(5),
-                            (HistoricDataRequest.HistoricDataTradingHours)reader.GetInt32(6),
-                            (HistoricDataRequest.HistoricDataDateFormat)reader.GetInt32(7),
-                            (HistoricDataRequest.HistoricDataKeepUpToDate)reader.GetInt32(8),
-                            tagValueRepository.Get(reader.GetInt32(9))
+                            Convert.ToInt32( reader["Id"]),
+                            Convert.ToInt32(reader["RequestId"]),
+                            contractRepository.Get(Convert.ToInt32(reader["ContractId"])),
+                            reader["EndDate"].ToString(),
+                            Convert.ToInt32(reader["DurationLength"]),
+                            enum_classes.HistoricDataDurationUnits.FromValue(Convert.ToInt32(reader["DurationType"])).Name,
+                            enum_classes.HistoricDataBarSize.FromValue(Convert.ToInt32(reader["BarSize"])).Name,
+                            enum_classes.HistoricDataWhatToShow.FromValue(Convert.ToInt32(reader["WhatToShow"])).Name,
+                            enum_classes.HistoricDataTradingHours.FromValue(Convert.ToInt32(reader["TradingHours"])).Name,
+                            enum_classes.HistoricDataDateFormat.FromValue(Convert.ToInt32(reader["DateFormat"])).Name,
+                            Convert.ToBoolean(reader["KeepUpToDate"]),
+                            //null, // todo reader["TagValueId"] != DBNull.Value ? tagValueRepository.Get(Convert.ToInt32(reader["TagValueId"])) : new List<IBApi.TagValue>(),
+                            reader["Name"].ToString()
                         );
 
                         historicDataRequests.Add(historicDataRequest);
