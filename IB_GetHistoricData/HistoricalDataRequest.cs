@@ -59,7 +59,7 @@ namespace IB_GetHistoricData
             RequestId = requestId;
             Contract = contract;
             EndDate = endDate;
-            DurationLength = DurationLength;
+            DurationLength = durationLength;
             DurationType = durationType;
             BarSize = barSize;
             WhatToShow = whatToShow;

@@ -37,12 +37,12 @@ namespace IB_GetHistoricData.enum_classes
             HistoricDataWhatToShows.Add(this);
         }
 
-        public static HistoricDataWhatToShow FromString(string hddfString)
+        public static HistoricDataWhatToShow FromValue(string hddfString)
         {
             return HistoricDataWhatToShows.Single(r => String.Equals(r.Name, hddfString, StringComparison.OrdinalIgnoreCase));
         }
 
-        public static HistoricDataWhatToShow FromValue(int value)
+        public static HistoricDataWhatToShow FromKey(int value)
         {
             return HistoricDataWhatToShows.Single(r => r.Value == value);
         }

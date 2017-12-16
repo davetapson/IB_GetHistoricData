@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -7,6 +8,8 @@ namespace IB_GetHistoricData.DL
 {
     internal class HistoricDataRequestRepo
     {
+        Logger logger = LogManager.GetCurrentClassLogger();
+
         internal List<HistoricDataRequest> Get()
         {
             List<HistoricDataRequest> historicDataRequests = new List<HistoricDataRequest>();
@@ -34,11 +37,11 @@ namespace IB_GetHistoricData.DL
                             contractRepository.Get(Convert.ToInt32(reader["ContractId"])),
                             reader["EndDate"].ToString(),
                             Convert.ToInt32(reader["DurationLength"]),
-                            enum_classes.HistoricDataDurationUnits.FromValue(Convert.ToInt32(reader["DurationType"])).Name,
-                            enum_classes.HistoricDataBarSize.FromValue(Convert.ToInt32(reader["BarSize"])).Name,
-                            enum_classes.HistoricDataWhatToShow.FromValue(Convert.ToInt32(reader["WhatToShow"])).Name,
-                            enum_classes.HistoricDataTradingHours.FromValue(Convert.ToInt32(reader["TradingHours"])).Name,
-                            enum_classes.HistoricDataDateFormat.FromValue(Convert.ToInt32(reader["DateFormat"])).Name,
+                            enum_classes.HistoricDataDurationUnits.FromKey(Convert.ToInt32(reader["DurationType"])).Name,
+                            enum_classes.HistoricDataBarSize.FromKey(Convert.ToInt32(reader["BarSize"])).Name,
+                            enum_classes.HistoricDataWhatToShow.FromKey(Convert.ToInt32(reader["WhatToShow"])).Name,
+                            enum_classes.HistoricDataTradingHours.FromKey(Convert.ToInt32(reader["TradingHours"])).Name,
+                            enum_classes.HistoricDataDateFormat.FromKey(Convert.ToInt32(reader["DateFormat"])).Name,
                             Convert.ToBoolean(reader["KeepUpToDate"]),
                             //null, // todo reader["TagValueId"] != DBNull.Value ? tagValueRepository.Get(Convert.ToInt32(reader["TagValueId"])) : new List<IBApi.TagValue>(),
                             reader["Name"].ToString()
@@ -55,32 +58,40 @@ namespace IB_GetHistoricData.DL
         {
             string insertSP = "HistoricalDataRequest_Insert";
 
-            using (SqlConnection connection = new SqlConnection(Connection.ConnectionString))
+            try
             {
-                SqlCommand cmd = new SqlCommand(insertSP, connection)
+                using (SqlConnection connection = new SqlConnection(Connection.ConnectionString))
                 {
-                    CommandType = CommandType.StoredProcedure
-                };
+                    SqlCommand cmd = new SqlCommand(insertSP, connection)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
 
-                cmd.Parameters.AddWithValue("@RequestId", historicDataRequest);
-                cmd.Parameters.AddWithValue("@ContractId", historicDataRequest);
-                cmd.Parameters.AddWithValue("@EndDate", historicDataRequest);
-                cmd.Parameters.AddWithValue("@Duration", historicDataRequest);
-                cmd.Parameters.AddWithValue("@BarSize", historicDataRequest);
-                cmd.Parameters.AddWithValue("@WhatToShow", historicDataRequest);
-                cmd.Parameters.AddWithValue("@TradingHours", historicDataRequest);
-                cmd.Parameters.AddWithValue("@DateFormat", historicDataRequest);
-                cmd.Parameters.AddWithValue("@KeepUpToDate", historicDataRequest);
-                cmd.Parameters.AddWithValue("@TagValueListId", historicDataRequest);
-                cmd.Parameters.AddWithValue("@Name", historicDataRequest);
+                    cmd.Parameters.AddWithValue("@RequestId", historicDataRequest.RequestId);
+                    cmd.Parameters.AddWithValue("@ContractId", historicDataRequest.Contract.ConId);
+                    cmd.Parameters.AddWithValue("@EndDate", historicDataRequest.EndDate);
+                    cmd.Parameters.AddWithValue("@DurationLength", historicDataRequest.DurationLength);
+                    cmd.Parameters.AddWithValue("@DurationType", historicDataRequest.DurationType);
+                    cmd.Parameters.AddWithValue("@BarSize", historicDataRequest.BarSize);
+                    cmd.Parameters.AddWithValue("@WhatToShow", historicDataRequest.WhatToShow);
+                    cmd.Parameters.AddWithValue("@TradingHours", historicDataRequest.TradingHours);
+                    cmd.Parameters.AddWithValue("@DateFormat", historicDataRequest.DateFormat);
+                    cmd.Parameters.AddWithValue("@KeepUpToDate", historicDataRequest.KeepUpToDate);
+                    cmd.Parameters.AddWithValue("@Name", historicDataRequest.Name);
 
-                connection.Open();
-                int result = Convert.ToInt32(cmd.ExecuteScalar());
-                connection.Close();
+                    connection.Open();
+                    int result = Convert.ToInt32(cmd.ExecuteScalar());
+                    connection.Close();
 
-                if (result == 0) throw new Exception("Could not insert historic data request:" + historicDataRequest.ToString());
+                    if (result == 0) throw new Exception("Could not insert historic data request:" + historicDataRequest.ToString());
 
-                return result;
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Error("Save - Failed to insert Historical Data Request: " + e.Message);
+                throw;
             }
         }
     }

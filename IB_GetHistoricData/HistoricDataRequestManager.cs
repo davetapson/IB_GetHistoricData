@@ -18,20 +18,12 @@ namespace IB_GetHistoricData
             this.clientSocket = clientSocket;
         }
 
-        public void AddHistoricRequest(HistoricDataRequest historicDataRequest)
-        {
-            historicDataRequests.Add(historicDataRequest);
-        }
-
         public void GetHistoricDataRequestsFromDB()
         {
             DL.HistoricDataRequestRepo historicDataRequestRepo = new DL.HistoricDataRequestRepo();
-            List<HistoricDataRequest> historicDataRequests = historicDataRequestRepo.Get();
-            foreach(HistoricDataRequest hdr in historicDataRequests)
-            {
-                AddHistoricRequest(hdr);
-            }
+            historicDataRequests = historicDataRequestRepo.Get();
         }
+
         public void MakeRequests()
         {
             foreach(HistoricDataRequest hdr in historicDataRequests)
@@ -44,12 +36,12 @@ namespace IB_GetHistoricData
 
                     clientSocket.reqHistoricalData( hdr.RequestId,
                                                     hdr.Contract,
-                                                    hdr.EndDate,
+                                                    "", //hdr.EndDate, empty string = now
                                                     hdr.DurationLength.ToString() + " " + hdr.DurationType,
                                                     hdr.BarSize,
                                                     hdr.WhatToShow,
-                                                    enum_classes.HistoricDataTradingHours.FromString(hdr.TradingHours).Value,
-                                                    enum_classes.HistoricDataDateFormat.FromString(hdr.DateFormat).Value,
+                                                    enum_classes.HistoricDataTradingHours.FromValue(hdr.TradingHours).Value,
+                                                    enum_classes.HistoricDataDateFormat.FromValue(hdr.DateFormat).Value,
                                                     hdr.KeepUpToDate,
                                                     null);
                 }

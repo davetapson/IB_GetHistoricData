@@ -22,12 +22,12 @@ namespace IB_GetHistoricData.enum_classes
             HistoricDataDateFormats.Add(this);
         }
 
-        public static HistoricDataDateFormat FromString(string hddfString)
+        public static HistoricDataDateFormat FromValue(string hddfString)
         {
             return HistoricDataDateFormats.Single(r => String.Equals(r.Name, hddfString, StringComparison.OrdinalIgnoreCase));
         }
 
-        public static HistoricDataDateFormat FromValue(int value)
+        public static HistoricDataDateFormat FromKey(int value)
         {
             return HistoricDataDateFormats.Single(r => r.Value == value);
         }

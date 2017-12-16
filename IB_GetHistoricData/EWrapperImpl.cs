@@ -689,6 +689,8 @@ namespace IB_GetHistoricData
         public void historicalDataUpdate(int reqId, Bar bar)
         {
             Console.WriteLine("HistoricalDataUpdate. " + reqId + " - Time: " + bar.Time + ", Open: " + bar.Open + ", High: " + bar.High + ", Low: " + bar.Low + ", Close: " + bar.Close + ", Volume: " + bar.Volume + ", Count: " + bar.Count + ", WAP: " + bar.WAP);
+
+            repository.InsertBar(reqId, bar.Time, bar.Open, bar.High, bar.Low, bar.Close, bar.Volume, bar.Count, bar.WAP);
         }
         //! [historicalDataUpdate]
 

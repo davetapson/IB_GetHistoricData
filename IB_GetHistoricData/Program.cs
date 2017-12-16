@@ -25,7 +25,7 @@ namespace IB_GetHistoricData
 
             try
             {
-                IBGatewayClientConnectionData iBGatewayClientConnectionData = new IBGatewayClientConnectionData("", 4001, 1001); // todo - get from db
+                IBGatewayClientConnectionData iBGatewayClientConnectionData = new IBGatewayClientConnectionData(); // todo - get from db
                 HistoricalData historicalData = new HistoricalData(iBGatewayClientConnectionData);
                 historicalData.GetHistoricData();
             }

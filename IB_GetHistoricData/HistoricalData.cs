@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using IBApi;
 using System.Threading;
 using NLog;
@@ -43,9 +41,8 @@ namespace IB_GetHistoricData
 
             // Make historic data request
             HistoricDataRequestManager historicDataRequestManager = new HistoricDataRequestManager(ibClient.ClientSocket);
-            //historicDataRequestManager.AddHistoricRequest(new HistoricDataRequest(1));
             historicDataRequestManager.GetHistoricDataRequestsFromDB();
-            //historicDataRequestManager.MakeRequests();
+            historicDataRequestManager.MakeRequests();
 
             // Keep console up
             Console.WriteLine("Press any key to quit...");

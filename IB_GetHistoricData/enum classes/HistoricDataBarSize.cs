@@ -46,14 +46,14 @@ namespace IB_GetHistoricData.enum_classes
             HistoricDataBarSizes.Add(this);
         }
 
-        public static HistoricDataBarSize FromString(string hddfString)
+        public static HistoricDataBarSize FromValue(string hddfString)
         {
             return HistoricDataBarSizes.Single(r => String.Equals(r.Name, hddfString, StringComparison.OrdinalIgnoreCase));
         }
 
-        public static HistoricDataBarSize FromValue(int value)
+        public static HistoricDataBarSize FromKey(int value)
         {
             return HistoricDataBarSizes.Single(r => r.Value == value);
         }
     }
-}
+} 

@@ -1,5 +1,7 @@
 ﻿namespace IB_GetHistoricData
 {
+    public enum IBClient { Gateway = 4002, TWS = 4001 }
+
     class IBGatewayClientConnectionData
     {
         public IBGatewayClientConnectionData(string server, int port, int clientId)
@@ -13,7 +15,7 @@
         public IBGatewayClientConnectionData()
         {
             Server = "";
-            Port = 4001;
+            Port = (int)IBClient.Gateway;
             ClientId = 1001;
         }
 

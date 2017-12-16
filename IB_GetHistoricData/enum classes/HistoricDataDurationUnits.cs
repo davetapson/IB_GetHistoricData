@@ -24,12 +24,12 @@ namespace IB_GetHistoricData.enum_classes
             HistoricDataDurationUnitss.Add(this);
         }
 
-        public static HistoricDataDurationUnits FromString(string hddfString)
+        public static HistoricDataDurationUnits FromValue(string hddfString)
         {
             return HistoricDataDurationUnitss.Single(r => String.Equals(r.Name, hddfString, StringComparison.OrdinalIgnoreCase));
         }
 
-        public static HistoricDataDurationUnits FromValue(int value)
+        public static HistoricDataDurationUnits FromKey(int value)
         {
             return HistoricDataDurationUnitss.Single(r => r.Value == value);
         }
